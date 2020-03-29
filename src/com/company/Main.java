@@ -6,6 +6,6 @@ public class Main {
 
         System.out.printf("hello");
         System.out.printf("hi2");
-
+        System.out.println("hi");
     }
 }
