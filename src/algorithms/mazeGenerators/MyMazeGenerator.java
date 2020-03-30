@@ -1,19 +1,18 @@
-package algorithms.mazeGenerator;
-
-import java.util.ArrayList;
+package algorithms.mazeGenerators;
 import java.util.LinkedList;
 
 public class MyMazeGenerator extends AMazeGenerator {
 
     @Override
     public Maze generate(int rows, int columns) {
+        //put 1 in all (creates mat of walls)
         int[][] mat = new int[rows][columns];
         for (int i = 0; i < rows; i++) {
             for (int j = 0; j < columns; j++) {
                 mat[i][j] = 1;
             }
         }
-
+        //create a list of neighbors
         LinkedList<Position[]> neighbors = new LinkedList<>();
         int x = (int) (Math.random() * (rows));
         int y = (int) (Math.random() * (columns));
@@ -22,6 +21,7 @@ public class MyMazeGenerator extends AMazeGenerator {
         neighbors.add(new Position[]{pos, pos});
 
         while (!neighbors.isEmpty()) {
+            // choose random position from the neighbors list
             Position[] n = neighbors.remove((int) (Math.random() * (neighbors.size())));
             Position Pos2 = n[1];
 //            System.out.print(Pos2);
@@ -35,6 +35,7 @@ public class MyMazeGenerator extends AMazeGenerator {
             Position tempPos1;
             Position tempPos2;
 
+            //add neighbors of the chosen position
             if (mat[x2][y2] == 1) {
                 mat[x1][y1] = mat[x2][y2] = 0;
                 if (x2 >= 2 && mat[x2 - 2][y2] == 1) {
@@ -67,15 +68,18 @@ public class MyMazeGenerator extends AMazeGenerator {
                 }
             }
         }
-        Position[] startEnd = creatStartEnd(rows, columns); //TODO: start and end meet
+        Position[] startEnd = creatStartEnd(rows, columns);
         Position start = startEnd[0];
         Position end = startEnd[1];
+
+        // make sure start and end are 0 (there is a path between start and end)
         while (mat[start.getRowIndex()][start.getColumnIndex()] !=0 || mat[end.getRowIndex()][end.getColumnIndex()] !=0){
             startEnd = creatStartEnd(rows, columns);
             start = startEnd[0];
             end = startEnd[1];
         }
 
+        // create maze
         Maze newMaze = new Maze(mat, start, end);
         return newMaze;
     }
@@ -112,7 +116,6 @@ public class MyMazeGenerator extends AMazeGenerator {
 //
 //            mat[wallList.get(rand).getRowIndex()][wallList.get(rand).getColumnIndex()] = 0;
 //            }
-
 //        }
 
 

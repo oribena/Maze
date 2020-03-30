@@ -1,8 +1,14 @@
-package algorithms.mazeGenerator;
+package algorithms.mazeGenerators;
 
 public abstract class AMazeGenerator implements IMazeGenerator {
 
     public long measureAlgorithmTimeMillis(int rows, int columns){
+        //check input TODO: ask if ok
+        if (rows<0)
+            rows =0;
+        if (columns<0)
+            columns=0;
+        //measureAlgorithmTimeMillis = with maze - without maze
         long firstTime = System.currentTimeMillis();
         generate(rows, columns);
         long secondTime = System.currentTimeMillis();
@@ -18,6 +24,7 @@ public abstract class AMazeGenerator implements IMazeGenerator {
 
         int randStart = (int) (Math.random() * (4));
         int randEnd = (int) (Math.random() * (4));
+        // if start and end are both on the same edge
         while (randStart==randEnd){
             randEnd = (int) (Math.random() * (4));
         }

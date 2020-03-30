@@ -1,4 +1,4 @@
-package algorithms.mazeGenerator;
+package algorithms.mazeGenerators;
 
 import java.util.Arrays;
 
@@ -24,14 +24,12 @@ public class Maze {
 
     public void print(){ //TODO: Print or print
         if (mat == null)
-            System.out.print("null"); //TODO: check
+            System.out.print("null"); //TODO: check if ok
 
         int iMax = mat.length - 1;
         if (iMax == -1)
-            System.out.print(""); //TODO: check
+            System.out.print(""); //TODO: check if ok
 
-        //StringBuilder b = new StringBuilder();
-        //System.out.print('[');
         for (int i = 0; i<mat.length ; i++) {
             for (int j=0; j<mat[0].length; j++){
                 if (i==start.getRowIndex() && j==start.getColumnIndex()){
@@ -47,10 +45,6 @@ public class Maze {
                 }
             }
         }
-//            b.append(String.valueOf(mat[i]));
-//            if (i == iMax)
-//                return b.append(']').toString();
-//            b.append(", ");
     }
 
     @Override
