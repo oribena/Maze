@@ -51,7 +51,7 @@ public abstract class AMazeGenerator implements IMazeGenerator {
         }
         else if (randEnd==2){
             int row = (int) (Math.random() * (rows));
-            endPos = new Position(row, columns);
+            endPos = new Position(row, columns-1);
         }
         else {
             int col = (int) (Math.random() * (columns));
