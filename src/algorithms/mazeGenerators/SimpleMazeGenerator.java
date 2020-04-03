@@ -5,6 +5,11 @@ public class SimpleMazeGenerator extends AMazeGenerator{
 
     @Override
     public Maze generate(int rows, int columns) { //TODO: add a valid path
+        //check input TODO: ask if ok
+        if (rows<3)
+            rows =3;
+        if (columns<3)
+            columns=3;
         int[][] mat = new int[rows][columns];
         for (int i=0; i<rows; i++ ){
             for (int j=0; j<columns; j++){

@@ -4,10 +4,10 @@ public abstract class AMazeGenerator implements IMazeGenerator {
 
     public long measureAlgorithmTimeMillis(int rows, int columns){
         //check input TODO: ask if ok
-        if (rows<0)
-            rows =0;
-        if (columns<0)
-            columns=0;
+        if (rows<3)
+            rows =3;
+        if (columns<3)
+            columns=3;
         //measureAlgorithmTimeMillis = with maze - without maze
         long firstTime = System.currentTimeMillis();
         generate(rows, columns);
