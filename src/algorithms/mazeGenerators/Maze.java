@@ -14,6 +14,18 @@ public class Maze {
         this.end = end;
     }
 
+    public int[][] getMat() {
+        return mat;
+    }
+
+    public int getNumOfRows() {
+        return mat.length;
+    }
+
+    public int getNumOfColumns() {
+        return mat[0].length;
+    }
+
     public Position getStartPosition() {
         return start;
     }
