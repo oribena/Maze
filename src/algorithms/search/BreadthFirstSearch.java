@@ -13,6 +13,8 @@ public class BreadthFirstSearch extends ASearchingAlgorithm {
 
         // Mark the start state as visited and add it to the queue
         Is.getStartState().setVisited(true);
+        visitedNodes++;
+        solArr.add(Is.getStartState());
         queue.add(Is.getStartState());
 
         while (queue.size() != 0)
