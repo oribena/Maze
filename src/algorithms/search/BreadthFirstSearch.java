@@ -1,26 +1,41 @@
 package algorithms.search;
 
+import algorithms.mazeGenerators.Position;
+
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.PriorityQueue;
+import java.util.Queue;
 
 public class BreadthFirstSearch extends ASearchingAlgorithm {
+
+    public BreadthFirstSearch() {
+        this.queue = new LinkedList<AState>();
+        this.visitedNodes = 0;
+    }
+
     @Override
     public Solution solve(ISearchable Is) {
+        if (Is==null || Is.getStartState()==null || Is.getGoalState()==null)
+            return null;
+        Is.ClearVisited();
         ArrayList<AState> solArr = new ArrayList<AState>();
-
-        // Create a queue of valid pass for BFS
-        PriorityQueue<AState> queue = new PriorityQueue<AState>();
 
         // Mark the start state as visited and add it to the queue
         Is.getStartState().setVisited(true);
-        visitedNodes++;
-        solArr.add(Is.getStartState());
+//        visitedNodes++;
+//        solArr.add(Is.getStartState());
         queue.add(Is.getStartState());
-
+        Solution sol = null;
         while (queue.size() != 0)
         {
             // remove a random state from the queue and add it to the solution path
             AState currState = queue.poll();
+            if (currState.equals(Is.getGoalState())) {
+                solArr.add(currState);
+                sol = new Solution(currState);
+                break;
+            }
             solArr.add(currState);
 
             //get all the possible next states
@@ -33,16 +48,29 @@ public class BreadthFirstSearch extends ASearchingAlgorithm {
                     visitedNodes++;
                     neighbors.get(i).setCameFrom(currState);
                     //if we arrived to the end, exit
-                    if (neighbors.get(i).equals(Is.getGoalState())) {
-                        solArr.add(neighbors.get(i));
-                        return new Solution(Is.getGoalState(), solArr);
-                    }
+////////////////////////////////
                     //add the neighbor to the queue
                     queue.add(neighbors.get(i));
                 }
             }
         }
         //if we arrived here there is no solution
-        return null;
+        return sol;
     }
+
+    @Override
+    public String getName() {
+        return "Breadth First Search";
+    }
+
+//    public void clearVisited(ISearchable Is){
+//        for (int i = 0; i < Is.gstateMat.length; i++) {
+//            for (int j = 0; j < stateMat[0].length; j++) {
+//                Position currPos = new Position(i, j);
+//                int currVal = m_maze.getMat()[i][j];
+//                stateMat[i][j] = new MazeState(currPos, currVal);
+//            }
+//
+//        }
+//    }
 }

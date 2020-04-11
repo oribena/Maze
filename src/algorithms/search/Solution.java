@@ -1,6 +1,8 @@
 package algorithms.search;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 
 public class Solution {
     private AState goalState;
@@ -11,11 +13,24 @@ public class Solution {
         this.path = path;
     }
 
+    public Solution(AState goalState) {
+        this.goalState = goalState;
+        ArrayList<AState> p = new ArrayList<AState>();
+        AState curr = goalState;
+//        p.add(goalState);
+        while (curr!=null) {
+            p.add(curr);
+            curr = curr.getCameFrom();
+        }
+        Collections.reverse(p);
+        this.path = p;
+    }
+
     public AState getGoalState() {
         return goalState;
     }
 
-    public ArrayList<AState> getPath() {
+    public ArrayList<AState> getSolutionPath() {
         return path;
     }
 

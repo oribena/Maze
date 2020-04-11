@@ -6,10 +6,10 @@ public class MyMazeGenerator extends AMazeGenerator {
     @Override
     public Maze generate(int rows, int columns) {
         //check input TODO: ask if ok
-        if (rows<3)
-            rows =3;
-        if (columns<3)
-            columns=3;
+        if (rows<6)
+            rows =6;
+        if (columns<6)
+            columns=6;
         //put 1 in all (creates mat of walls)
         int[][] mat = new int[rows][columns];
         for (int i = 0; i < rows; i++) {

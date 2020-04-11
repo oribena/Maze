@@ -1,22 +1,24 @@
 package algorithms.search;
 
+import java.util.LinkedList;
 import java.util.PriorityQueue;
+import java.util.Queue;
 
 public abstract class ASearchingAlgorithm implements ISearchingAlgorithm{
 
     //// I added from the mazeget
 
-    protected PriorityQueue<AState> openList;
+    protected Queue<AState> queue; //openList
     protected int visitedNodes;
 
     public ASearchingAlgorithm() {
-        this.openList = new PriorityQueue<AState>();
+        this.queue = new LinkedList<AState>();
         this.visitedNodes = 0;
     }
 
     protected AState popOpenList(){
         visitedNodes++;
-        return openList.poll();
+        return queue.poll();
     }
 
     @Override
@@ -25,7 +27,7 @@ public abstract class ASearchingAlgorithm implements ISearchingAlgorithm{
     }
 
     @Override
-    public int getNumOfVisitedNodes() {
+    public int getNumberOfNodesEvaluated() {
         return visitedNodes;
     }
 }

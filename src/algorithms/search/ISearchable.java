@@ -9,4 +9,6 @@ public interface ISearchable {
     public MazeState getGoalState();
 
     public ArrayList<AState> getAllPossibleStates(AState s);
+
+    public void ClearVisited(); //TODO: check if valid
 }

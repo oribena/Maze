@@ -47,12 +47,25 @@ public class SearchableMaze implements ISearchable {
                 // if the state is valid
                 if (i >= 0 && i < m_maze.getNumOfRows() && j >= 0 && j < m_maze.getNumOfColumns()) {
                     // if this is a neighbor with a pass
-                    if (i != row && j != col && stateMat[i][j].getVal() == 0) {
+                    if (!(i == row && j == col) && stateMat[i][j].getVal() == 0) {
                         res.add(stateMat[i][j]);
+                        if (row-i==0 || col-j==0)
+                            stateMat[i][j].setPriority(10);
+                        stateMat[i][j].setPriority(15);
                     }
                 }
             }
         }
         return res;
     }
+
+    @Override
+    public void ClearVisited() {
+        for (int i = 0; i < stateMat.length; i++) {
+            for (int j = 0; j < stateMat[0].length; j++) {
+                this.stateMat[i][j].setVisited(false);
+            }
+        }
+    }
+
 }

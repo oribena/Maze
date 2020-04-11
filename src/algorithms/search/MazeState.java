@@ -13,6 +13,7 @@ public class MazeState extends AState {
     public MazeState(Position pos, int val) {
         this.pos = pos;
         this.val = val;
+        this.state = pos.toString();
     }
 
     public Position getPos() {
