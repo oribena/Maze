@@ -8,7 +8,7 @@ public interface ISearchable {
 
     public MazeState getGoalState();
 
-    public ArrayList<AState> getAllPossibleStates(AState s);
+    public ArrayList<AState> getAllPossibleStates(AState s, String algName);
 
     public void ClearVisited(); //TODO: check if valid
 }

@@ -1,5 +1,6 @@
 package algorithms.search;
 
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.PriorityQueue;
 import java.util.Queue;
@@ -8,6 +9,7 @@ public abstract class ASearchingAlgorithm implements ISearchingAlgorithm{
 
     //// I added from the mazeget
 
+    protected HashMap<AState, Integer> sumPriority = new HashMap<AState, Integer>();
     protected Queue<AState> queue; //openList
     protected int visitedNodes;
 

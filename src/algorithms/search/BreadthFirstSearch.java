@@ -23,6 +23,7 @@ public class BreadthFirstSearch extends ASearchingAlgorithm {
 
         // Mark the start state as visited and add it to the queue
         Is.getStartState().setVisited(true);
+        sumPriority.put(Is.getStartState(),0);
 //        visitedNodes++;
 //        solArr.add(Is.getStartState());
         queue.add(Is.getStartState());
@@ -39,7 +40,7 @@ public class BreadthFirstSearch extends ASearchingAlgorithm {
             solArr.add(currState);
 
             //get all the possible next states
-            ArrayList<AState> neighbors = Is.getAllPossibleStates(currState);
+            ArrayList<AState> neighbors = Is.getAllPossibleStates(currState, getName());
             // go over all the neighbors of the curr state
             for (int i = 0; i < neighbors.size() ; i++) {
                 //if the neighbor is not visited yet, set visited and set parent
@@ -47,10 +48,21 @@ public class BreadthFirstSearch extends ASearchingAlgorithm {
                     neighbors.get(i).setVisited(true);
                     visitedNodes++;
                     neighbors.get(i).setCameFrom(currState);
+                    int currSum = (int) (sumPriority.get(neighbors.get(i).getCameFrom())+neighbors.get(i).getPriority());
+                    sumPriority.put(neighbors.get(i), currSum);
                     //if we arrived to the end, exit
 ////////////////////////////////
                     //add the neighbor to the queue
                     queue.add(neighbors.get(i));
+                }
+                else { //if already visited check shortest path
+                    int newSum = (int) (sumPriority.get(currState)+neighbors.get(i).getPriority());
+                    int oldSum = sumPriority.get(neighbors.get(i));
+                    if (comparePriority(newSum,oldSum)){
+                        neighbors.get(i).setCameFrom(currState);
+                        sumPriority.put(neighbors.get(i), newSum);
+                    }
+
                 }
             }
         }
@@ -61,6 +73,12 @@ public class BreadthFirstSearch extends ASearchingAlgorithm {
     @Override
     public String getName() {
         return "Breadth First Search";
+    }
+
+    public boolean comparePriority(int newP, int oldP){
+        if ((newP-oldP)<0) // if the new priority is smaller
+            return true;
+        return false;
     }
 
 //    public void clearVisited(ISearchable Is){

@@ -38,7 +38,7 @@ public class SearchableMaze implements ISearchable {
     }
 
     @Override
-    public ArrayList<AState> getAllPossibleStates(AState s) {
+    public ArrayList<AState> getAllPossibleStates(AState s, String algName) {
         int row = ((MazeState) s).getPos().getRowIndex();
         int col = ((MazeState) s).getPos().getColumnIndex();
         ArrayList<AState> res = new ArrayList<AState>();
@@ -49,9 +49,13 @@ public class SearchableMaze implements ISearchable {
                     // if this is a neighbor with a pass
                     if (!(i == row && j == col) && stateMat[i][j].getVal() == 0) {
                         res.add(stateMat[i][j]);
-                        if (row-i==0 || col-j==0)
-                            stateMat[i][j].setPriority(10);
-                        stateMat[i][j].setPriority(15);
+                        if (algName == "Best First Search") {
+                            if (row - i == 0 || col - j == 0)
+                                stateMat[i][j].setPriority(10);
+                            stateMat[i][j].setPriority(15);
+                        }
+                        else // if bfs or dfs
+                            stateMat[i][j].setPriority(1);
                     }
                 }
             }

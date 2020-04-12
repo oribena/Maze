@@ -2,7 +2,7 @@ package algorithms.search;
 
 public abstract class AState implements Comparable<AState>{
     protected String state;////////////////////// TODO: delete
-    private double priority;
+    private int priority;
     private AState cameFrom;
     private boolean Visited;
 
@@ -34,7 +34,7 @@ public abstract class AState implements Comparable<AState>{
         return Visited;
     }
 
-    public void setPriority(double priority) {
+    public void setPriority(int priority) {
         this.priority = priority;
     }
 
